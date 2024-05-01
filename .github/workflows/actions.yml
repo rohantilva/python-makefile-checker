@@ -38,5 +38,5 @@ jobs:
     - name: Publish makefile_checker
       working-directory: makefile_checker
       run: |
-        poetry config http-basic rohantilva ${{ secrets.PYPI_GITHUB_AUTH }} 
+        poetry config pypi-token.pypi ${{ secrets.PYPI_GITHUB_AUTH }}
         poetry publish
