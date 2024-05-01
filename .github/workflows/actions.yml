@@ -1,0 +1,32 @@
+ame: Python package
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: cd into repo
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: install and set up python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.8.9
+
+    - name: Install package manager (poetry)
+      working-directory: makefile_checker
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 - --version 1.5.1
+        poetry self add "poetry-dynamic-versioning[plugin]==0.18.0"
+    - name: Validate lock file
+      working-directory: makefile_checker
+      run: |
+        poetry lock --check
+
+    - name: install deps
+      working-directory: makefile_checker
+      run: |
+        poetry install --all-extras

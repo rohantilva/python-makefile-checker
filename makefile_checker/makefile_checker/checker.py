@@ -1,10 +1,8 @@
-import argparse
-import re
 import os, fnmatch
 from pathlib import Path
 from typing import List
 
-NEWLINE = "\n"
+from makefile_checker.makefile_checker.exceptions import MissingFilesException
 
 
 def read_file_contents(path: str) -> str:
@@ -38,7 +36,7 @@ def clean_and_parse_makefile_scripts(makefile_contents: str) -> List[str]:
     Then the cleaned contents should be:
     [
         "this/is/a/script.py",
-        "this/is/a/script2.py"]
+        "this/is/a/script2.py"
     ]
 
     TODO(rohantilva): just use a regex to parse out the paths to scripts.
@@ -72,7 +70,7 @@ def get_makefiles_in_current_working_directory(pattern: str = "Makefile") -> Lis
     return result
 
 
-def validate_make(path_to_makefile: str) -> List[str]:
+def get_missing_scripts_for_makefile(path_to_makefile: str) -> List[str]:
     makefile_contents = read_file_contents(path_to_makefile)
     all_scripts = clean_and_parse_makefile_scripts(makefile_contents)
 
@@ -92,7 +90,9 @@ def validate_make(path_to_makefile: str) -> List[str]:
 def check():
     makefiles = get_makefiles_in_current_working_directory()
 
-    all_scripts = None
+    all_alerts = []
     for makefile in makefiles:
-        validate_make(makefile)
+        all_alerts.extend(get_missing_scripts_for_makefile(makefile))
 
+    if len(all_alerts) > 0:
+        raise MissingFilesException(all_alerts)
