@@ -35,6 +35,6 @@ jobs:
       working-directory: makefile_checker
       run: |
         poetry build -f wheel
-    # - name: Publish makefile_checker
-    #   run: |
-    #     poetry publish
+    - name: Publish makefile_checker
+      run: |
+        poetry publish
