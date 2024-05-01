@@ -49,6 +49,8 @@ def clean_and_parse_makefile_scripts(makefile_contents: str) -> List[str]:
     for line in python_lines:
         end_index = line.find(".py")
         line = line[:end_index + 3]
+        start_index = line.rindex(" ")
+        line = line[start_index + 1:]
         scripts.append(line)
 
     return scripts
@@ -80,8 +82,8 @@ def get_missing_scripts_for_makefile(path_to_makefile: str) -> List[str]:
 
     alerts = []
     for script in all_scripts:
-        file_path = f"{base_path}/{script}"
-        if not Path(file_path.strip("/")).is_file():
+        file_path = f"/{base_path}/{script.strip()}"
+        if not Path(file_path).is_file():
             alerts.append(file_path)
 
     return alerts
