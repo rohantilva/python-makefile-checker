@@ -8,13 +8,13 @@ successfully, and so renames / edits to python scripts that aren't reflected in 
 consequences. It would be great to catch these errors early, before a PR is merged.
 
 ## What it does
-This python project publishes a script that one can use to verify that scripts listed in a Makefile actually exist
+This python project publishes a package that one can use to verify that scripts listed in a Makefile actually exist
 within a filesystem. Since this utility is a script, it can be called from github actions itself, or from within
-python code itself.
+python code itself. I'll provide an example on how to use from within a GitHub Actions workflow file below.
 
 ## How to use
 
-If using in a Github Actions workflow file, you can follow these steps below.
+If using in a Github Actions workflow file, you can follow these steps.
 
 ### First install the package
 ```

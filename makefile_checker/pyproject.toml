@@ -17,7 +17,7 @@ format-jinja = """
 """
 
 [tool.poetry.scripts]
-check-makefile = "makefile_checker.checker:check"
+check-makefile = "makefile_checker.check:check"
 
 [build-system]
 requires = ["poetry-core>=1.9.0", "poetry-dynamic-versioning"]
