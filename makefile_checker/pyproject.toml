@@ -3,6 +3,7 @@ name = "makefile-checker"
 version = "0.0.0"
 description = "Package to validate makefile contents"
 authors = ["rohantilva"]
+readme = "../README.md"
 
 [tool.poetry-dynamic-versioning]
 enable = true
