@@ -30,3 +30,11 @@ jobs:
       working-directory: makefile_checker
       run: |
         poetry install --all-extras
+
+    - name: Build makefile_checker
+      working-directory: makefile_checker
+      run: |
+        poetry build -f wheel
+    # - name: Publish makefile_checker
+    #   run: |
+    #     poetry publish
