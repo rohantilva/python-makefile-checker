@@ -11,3 +11,22 @@ consequences. It would be great to catch these errors early, before a PR is merg
 This python project publishes a script that one can use to verify that scripts listed in a Makefile actually exist
 within a filesystem. Since this utility is a script, it can be called from github actions itself, or from within
 python code itself.
+
+## How to use
+
+If using in a Github Actions workflow file, you can follow these steps below.
+
+### First install the package
+```
+pip install makefile-checker
+```
+
+## Add the following step to your workflow file:
+
+```
+  - name: Check Makefile(s)
+    shell: bash
+    working-directory: <your working directory>
+    run: |
+      poetry run check-makefile
+```
